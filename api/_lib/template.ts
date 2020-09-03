@@ -71,15 +71,17 @@ function getCss(theme: string, fontSize: string) {
     }
 
     .logo-wrapper {
-        display: flex;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
-        justify-items: center;
     }
 
     .logo {
-        margin: 0 75px;
+        position: absolute;
+        left: 40%;
+        top: 0;
+        height: 100vh;
+        object-fit: cover;
+        margin-top: auto;
+        margin-bottom: auto;
+        opacity: 20%
     }
 
     .plus {
@@ -109,7 +111,7 @@ function getCss(theme: string, fontSize: string) {
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
-    const { text, theme, md, fontSize } = parsedReq;
+    const { text, theme, md, fontSize, images  } = parsedReq;
     return `<!DOCTYPE html>
 <html>
     <meta charset="utf-8">
@@ -121,6 +123,12 @@ export function getHtml(parsedReq: ParsedRequest) {
     <body>
         <div>
             <div class="spacer">
+            <div class="logo-wrapper">
+                ${images.map((img, i) =>
+                    getPlusSign(i) + getImage(img)
+                ).join('')}
+            </div>
+            <div class="spacer">
             <div class="heading">${emojify(
                 md ? marked(text) : sanitizeHtml(text)
             )}
@@ -130,16 +138,14 @@ export function getHtml(parsedReq: ParsedRequest) {
 </html>`;
 }
 
-// function getImage(src: string, width ='auto', height = '225') {
-//     return `<img
-//         class="logo"
-//         alt="Generated Image"
-//         src="${sanitizeHtml(src)}"
-//         width="${sanitizeHtml(width)}"
-//         height="${sanitizeHtml(height)}"
-//     />`
-// }
+function getImage(src: string) {
+    return `<img
+        class="logo"
+        alt="Generated Image"
+        src="${sanitizeHtml(src)}"
+    />`
+}
 
-// function getPlusSign(i: number) {
-//     return i === 0 ? '' : '<div class="plus">+</div>';
-// }
+function getPlusSign(i: number) {
+    return i === 0 ? '' : '<div class="plus">+</div>';
+}
