@@ -73,7 +73,7 @@ function getCss(theme: string, fontSize: string) {
         align-items: center;
         justify-content: center;
         position: absolute;
-        top: 15px;
+        top: 75px;
         left: 0;
         width: 100%;
     }
@@ -117,7 +117,7 @@ function getCss(theme: string, fontSize: string) {
         color: ${foreground};
         line-height: 1.25;
         position: absolute;
-        bottom: 15px;
+        bottom: 65px;
         left: 0;
         width: 100%;
         font-size: 32px;
