@@ -73,13 +73,13 @@ function getCss(theme: string, fontSize: string) {
         align-items: center;
         justify-content: center;
         position: absolute;
-        top: 75px;
+        top: 110px;
         left: 0;
         width: 100%;
     }
 
     .logo {
-        width: 100px;
+        width: 120px;
     }
 
     .plus {
@@ -117,10 +117,10 @@ function getCss(theme: string, fontSize: string) {
         color: ${foreground};
         line-height: 1.25;
         position: absolute;
-        bottom: 65px;
+        bottom: 85px;
         left: 0;
         width: 100%;
-        font-size: 32px;
+        font-size: 44px;
         text-align: center;
     }
     `;
