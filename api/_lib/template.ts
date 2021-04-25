@@ -7,56 +7,54 @@ const twemoji = require('twemoji');
 const twOptions = { folder: 'svg', ext: '.svg' };
 const emojify = (text: string) => twemoji.parse(text, twOptions);
 
-const rglr = readFileSync(`${__dirname}/../_fonts/Inter-Regular.woff2`).toString('base64');
-const bold = readFileSync(`${__dirname}/../_fonts/Inter-Bold.woff2`).toString('base64');
-const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString('base64');
-const heading = readFileSync(`${__dirname}/../_fonts/nunito-black.woff2`).toString('base64');
+const rglr = readFileSync(`${__dirname}/../_fonts/Circular-Medium.ttf`).toString('base64');
+const bold = readFileSync(`${__dirname}/../_fonts/Circular-Bold.ttf`).toString('base64');
+const heading = readFileSync(`${__dirname}/../_fonts/Ambit-Bold.otf`).toString('base64');
 
 function getCss(theme: string, fontSize: string) {
     let background = 'white';
-    let foreground = '#266DD3';
+    let foreground = '#000000';
+    let alt = '#2442D8';
+    let radial = 'lightgray';
 
     if (theme === 'dark') {
-        background = '#266DD3';
+        background = '#000000';
         foreground = 'white';
+        alt = '#FFBAB9';
+        radial = 'dimgray';
     }
     return `
     @font-face {
-        font-family: 'Inter';
+        font-family: 'Circular';
         font-style:  normal;
         font-weight: normal;
-        src: url(data:font/woff2;charset=utf-8;base64,${rglr}) format('woff2');
+        src: url(data:font/truetype;charset=utf-8;base64,${rglr}) format('truetype');
     }
 
     @font-face {
-        font-family: 'Inter';
+        font-family: 'Circular';
         font-style:  normal;
         font-weight: bold;
-        src: url(data:font/woff2;charset=utf-8;base64,${bold}) format('woff2');
+        src: url(data:font/truetype;charset=utf-8;base64,${bold}) format('truetype');
     }
 
     @font-face {
-        font-family: 'Vera';
+        font-family: 'Ambit';
         font-style: normal;
-        font-weight: normal;
-        src: url(data:font/woff2;charset=utf-8;base64,${mono})  format("woff2");
-      }
-
-    @font-face {
-        font-family: 'Nunito';
-        font-style: normal;
-        font-weight: 900;
-        src: url(data:font/woff2;charset=utf-8;base64,${heading})  format("woff2");
+        font-weight: bold;
+        src: url(data:font/woff2;charset=utf-8;base64,${heading})  format("opentype");
     }
 
     body {
         background: ${background};
+        background-image: radial-gradient(circle at 25px 25px, ${radial} 2%, transparent 0%), radial-gradient(circle at 75px 75px, ${radial} 2%, transparent 0%);
         background-size: 100px 100px;
         height: 100vh;
         display: flex;
         text-align: center;
         align-items: center;
         justify-content: center;
+        font-family: 'Circular', sans-serif;
     }
 
     code {
@@ -71,17 +69,17 @@ function getCss(theme: string, fontSize: string) {
     }
 
     .logo-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 15px;
+        left: 0;
+        width: 100%;
     }
 
     .logo {
-        position: absolute;
-        left: 40%;
-        top: 0;
-        height: 100vh;
-        object-fit: cover;
-        margin-top: auto;
-        margin-bottom: auto;
-        opacity: 20%
+        width: 100px;
     }
 
     .plus {
@@ -102,12 +100,30 @@ function getCss(theme: string, fontSize: string) {
     }
     
     .heading {
-        font-family: 'Nunito', sans-serif;
+        font-family: 'Ambit', sans-serif;
         font-size: ${sanitizeHtml(fontSize)};
         font-style: normal;
         color: ${foreground};
         line-height: 1.25;
-    }`;
+    }
+    
+    .heading strong {
+        color: ${alt};
+    }
+    
+    p.url {
+        font-family: 'Circular', sans-serif;
+        font-style: bold;
+        color: ${foreground};
+        line-height: 1.25;
+        position: absolute;
+        bottom: 15px;
+        left: 0;
+        width: 100%;
+        font-size: 32px;
+        text-align: center;
+    }
+    `;
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
@@ -134,6 +150,7 @@ export function getHtml(parsedReq: ParsedRequest) {
             )}
             </div>
         </div>
+        <p class="url">thefuture.build</p>
     </body>
 </html>`;
 }

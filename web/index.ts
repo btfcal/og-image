@@ -142,11 +142,12 @@ const markdownOptions: DropdownOption[] = [
 ];
 
 const imageLightOptions: DropdownOption[] = [
-    { text: 'Steak', value: 'https://executebig.org/images/brand/steak-blue.svg' },
+    { text: 'BTF', value: 'https://thefuture.build/images/icon.png' },
+    { text: 'Full Text', value: 'https://thefuture.build/images/text-logo.png' },
 ];
 
 const imageDarkOptions: DropdownOption[] = [
-    { text: 'Steak', value: 'https://executebig.org/images/brand/steak-white.svg' },
+    { text: 'BTF', value: 'https://thefuture.build/images/icon.png' },
 ];
 
 const widthOptions = [
